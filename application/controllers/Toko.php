@@ -27,9 +27,9 @@ class Toko extends RestController
   {
     parent::__construct();
     $this->load->model('toko_model', 'produk');
-    $this->methods['index_get']['limit'] = 2;
-    $this->methods['package_get']['limit'] = 2;
-    $this->methods['drink_get']['limit'] = 2;
+    $this->methods['index_get']['limit'] = 100;
+    $this->methods['package_get']['limit'] = 100;
+    $this->methods['drink_get']['limit'] = 100;
   }
 
   public function index_get()

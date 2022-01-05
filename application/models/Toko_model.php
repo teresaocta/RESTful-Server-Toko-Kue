@@ -29,31 +29,35 @@ class Toko_model extends CI_Model {
   {
     if($id===null)
     {
-      $this->db->select('id_produk, nama_produk, kategori, harga_produk, stok_produk, nama_drink as bonus');
+      $this->db->select('id_produk, nama_produk, kategori, harga_produk, stok_produk, produk.id_drink as id_bonus, nama_drink as bonus');
       $this->db->join('drink', 'produk.id_drink=drink.id_drink');
       return $this->db->get('produk', $limit, $offset)->result();
     }
     else
     {
-      $this->db->select('id_produk, nama_produk, kategori, harga_produk, stok_produk, nama_drink as bonus');
+      $this->db->select('id_produk, nama_produk, kategori, harga_produk, stok_produk, produk.id_drink as id_bonus, nama_drink as bonus');
       $this->db->join('drink', 'produk.id_drink=drink.id_drink');
-      return $this->db->get_where('produk', ['kode'=>$id])->result_array();
+      return $this->db->get_where('produk', ['id_produk'=>$id])->result_array();
     }
   }
 
-  public function get_category($category=null, $limit=5, $offset=0)
+  public function get_category($category=null, $limit=0, $offset=0)
   {
     if($category===null)
     {
+      $this->db->select('id_produk, nama_produk, kategori, harga_produk, stok_produk, produk.id_drink as id_bonus, nama_drink as bonus');
+      $this->db->join('drink', 'produk.id_drink=drink.id_drink');
       return $this->db->get('produk', $limit, $offset)->result();
     }
     else
     {
+      $this->db->select('id_produk, nama_produk, kategori, harga_produk, stok_produk, produk.id_drink as id_bonus, nama_drink as bonus');
+      $this->db->join('drink', 'produk.id_drink=drink.id_drink');
       return $this->db->get_where('produk', ['kategori'=>$category])->result_array();
     }
   }
 
-  public function get_drink($id=null, $limit=5, $offset=0)
+  public function get_drink($id=null, $limit=0, $offset=0)
   {
     if($id===null)
     {
@@ -65,7 +69,7 @@ class Toko_model extends CI_Model {
     }
   }
 
-  public function get_package($id=null, $limit=5, $offset=0)
+  public function get_package($id=null, $limit=0, $offset=0)
   {
     if($id===null)
     {
